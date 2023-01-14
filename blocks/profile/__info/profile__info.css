@@ -1,0 +1,13 @@
+.profile__info {
+  display: grid;
+  grid-template-columns: minmax(min-content, max-content);
+  grid-template-rows: minmax(min-content, max-content);
+  margin: 0 0 0 30px;
+  max-width: 610px;
+  gap: 16px;
+}
+
+.profile__info:nth-child(1) {
+  grid-template-columns: minmax(min-content, max-content) minmax(min-content, max-content);
+  margin: 0;
+}

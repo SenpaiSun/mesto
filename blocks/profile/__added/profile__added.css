@@ -1,0 +1,10 @@
+.profile__added {
+  max-width: 150px;
+  max-height: 50px;
+  background-color: black;
+  border: 2px solid #FFFFFF;
+  border-radius: 2px;
+  background-image: url(../../../image/Vector_added.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}

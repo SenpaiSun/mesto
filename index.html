@@ -1,13 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <link rel="stylesheet" href="./pages/page.css">
+  <title>Mesto</title>
 </head>
-<body>
-  
+<body class="root">
+  <header>
+    <div class="header">
+      <img src="./image/mesto_logo.png" class="header__logo">
+      <hr class="header__line">
+    </div>
+  </header>
+  <main>
+    <article class="profile">
+      <img class="profile__photo" src="./image/kusto_logo.jpg">
+      <div class="profile__info">
+        <div class="profile__info">
+          <h1 class="profile__info_user_name">Жак-Ив Кусто</h1>
+          <button class="profile__info_user_edit"></button>
+        </div>
+        <p class="profile__info_user_note">Исследователь океана</p>
+      </div>
+      <button class="profile__added"></button>
+    </article>
+  </main>
+  <footer>
+
+  </footer>
   <script src="./scripts/index.js"></script>
 </body>
 </html>

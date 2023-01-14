@@ -1,0 +1,10 @@
+.profile__info_user_edit {
+  background-color: black;
+  background-image: url(../../../../image/Vector_user_edit.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 24px;
+  height: 24px;
+  align-self: center;
+  border: 1px solid #FFFFFF;
+}

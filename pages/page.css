@@ -1,2 +1,13 @@
 @import url(../vendor/normalize.css);
 @import url(../vendor/fonts.css);
+@import url(../blocks/root/root.css);
+@import url(../blocks/header/header.css);
+@import url(../blocks/header/__line/header__line.css);
+@import url(../blocks/header/__logo/header__logo.css);
+@import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__added/profile__added.css);
+@import url(../blocks/profile/__info/profile__info.css);
+@import url(../blocks/profile/__info/_user_edit/profile__info_user_edit.css);
+@import url(../blocks/profile/__info/_user_name/profile__info_user_name.css);
+@import url(../blocks/profile/__info/_user_note/profile__info_user_note.css);
+@import url(../blocks/profile/__photo/profile__photo.css);
