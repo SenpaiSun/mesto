@@ -1,0 +1,8 @@
+.content__card_mesto_name {
+  color: #000;
+  margin: 25px auto 32px 21px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 185px;
+}

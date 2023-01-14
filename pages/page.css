@@ -11,3 +11,9 @@
 @import url(../blocks/profile/__info/_user_name/profile__info_user_name.css);
 @import url(../blocks/profile/__info/_user_note/profile__info_user_note.css);
 @import url(../blocks/profile/__photo/profile__photo.css);
+@import url(../blocks/content/content.css);
+@import url(../blocks/content/__card/content__card.css);
+@import url(../blocks/content/__card/_mesto_like/content__card_mesto_like.css);
+@import url(../blocks/content/__card/_mesto_name-like/content__card_mesto_name-like.css);
+@import url(../blocks/content/__card/_mesto_name/content__card_mesto_name.css);
+@import url(../blocks/content/__card/_mesto_photo/content__card_mesto_photo.css);

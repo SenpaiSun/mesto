@@ -1,0 +1,15 @@
+.content__card_mesto_like {
+  width: 22px;
+  height: 19px;
+  align-self: center;
+  justify-self: center;
+  margin: 30px 20px 30px auto;
+  border: none;
+  background-color: #FFFFFF;
+  background-image: url(../../../../image/Vector__like.svg);
+}
+
+.content__card_mesto_like:hover {
+  opacity: 40%;
+  cursor: pointer;
+}

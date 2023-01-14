@@ -1,0 +1,6 @@
+.content__card {
+  display: grid;
+  grid-template-rows: 1fr minmax(min-content, max-content);
+  max-width: 282px;
+  border-radius: 3px 3px 3px 3px;
+}
