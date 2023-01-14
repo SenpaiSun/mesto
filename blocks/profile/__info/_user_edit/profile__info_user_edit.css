@@ -8,3 +8,8 @@
   align-self: center;
   border: 1px solid #FFFFFF;
 }
+
+.profile__info_user_edit:hover {
+  opacity: 40%;
+  cursor: pointer;
+}

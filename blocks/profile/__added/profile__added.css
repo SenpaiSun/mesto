@@ -9,3 +9,8 @@
   background-position: center;
   margin: 35px 0 0;
 }
+
+.profile__added:hover {
+  opacity: 40%;
+  cursor: pointer;
+}
