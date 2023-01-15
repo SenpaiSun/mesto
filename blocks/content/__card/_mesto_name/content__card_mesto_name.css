@@ -1,6 +1,6 @@
 .content__card_mesto_name {
   color: #000;
-  margin: 25px auto 32px 21px;
+  margin: 25px auto auto 21px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;

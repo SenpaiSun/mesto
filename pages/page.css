@@ -18,3 +18,10 @@
 @import url(../blocks/content/__card/_mesto_name/content__card_mesto_name.css);
 @import url(../blocks/content/__card/_mesto_photo/content__card_mesto_photo.css);
 @import url(../blocks/footer/footer.css);
+@import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/__close/popup__close.css);
+@import url(../blocks/popup/__name/popup__name.css);
+@import url(../blocks/popup/__note/popup__note.css);
+@import url(../blocks/popup/__page/popup__page.css);
+@import url(../blocks/popup/__save/popup__save.css);
+@import url(../blocks/popup/__title/popup__title.css);
