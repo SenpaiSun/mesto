@@ -1,7 +1,7 @@
 # Проектная работа "Место" в [Яндекс.Практикум](https://practicum.yandex.ru) по профессии ["Веб-разработчик"](https://practicum.yandex.ru/web/).
 
 ## Описание:
-Проектная работа "Место" представляет из себя одностраничный сайт, который был сверстан по методологии [БЭМ](https://ru.bem.info/methodology/), c использованием файловой структуры [Nested БЭМ](https://ru.bem.info/methodology/filestructure/#nested). 
+Проектная работа "Место" представляет из себя одностраничный сайт, который был сверстан по методологии [БЭМ](https://ru.bem.info/methodology/), c использованием файловой структуры [Nested БЭМ](https://ru.bem.info/methodology/filestructure/#nested) с использованием JavaScript. На данный сайт можно загружать фотографии, лайкать их, менять данные профиля.
 
 ### Технологии, применяемые в проекте:
 1. HTML5:
@@ -10,11 +10,11 @@
 2. CSS:
 * flexbox;
 * grid;
-* animation;
 * и многие другие.
-3. File structure:
+3. JavaScript
+4. File structure:
 * Nesded BEM.
-4. Figma.
+5. Figma.
 
 #### Инструкция по использованию:
 
@@ -28,5 +28,5 @@
 
 ### Ссылки:
 
-* [Макет Figma](https://www.figma.com/file/5S2WSbEFL6awjVWJ0NWL8Q/Sprint-3_-Russia-_-desktop-mobile?node-id=28503%3A0)
-* [Ссылка на работу](https://senpaisun.github.io/russian-travel/).
+* [Макет Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
+* [Ссылка на работу](https://senpaisun.github.io/mesto/).
