@@ -1,4 +1,4 @@
-.content__card_mesto_name-like {
+.content__card-info {
   display: grid;
   grid-template-columns: 1fr minmax(min-content, max-content);
   background-color: #FFFFFF;

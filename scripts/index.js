@@ -1,13 +1,11 @@
-let buttonProfile = document.querySelector('.profile__info_user_edit');
+let buttonProfile = document.querySelector('.profile__info-edit');
 let buttonClose = document.querySelector('.popup__close');
 let popup = document.querySelector('.popup');
-let userName = document.querySelector('.profile__info_user_name');
-let userNote = document.querySelector('.profile__info_user_note');
+let userName = document.querySelector('.profile__info-username');
+let userNote = document.querySelector('.profile__info-note');
 let nameInput = document.querySelector('.popup__name');
 let noteInput = document.querySelector('.popup__note');
 let buttonSave = document.querySelector('.popup__save');
-let likeItem = document.querySelectorAll('.content__card_mesto_like');
-let content = document.querySelector('#content');
 
 buttonProfile.addEventListener('click', function () {
   popup.setAttribute('style', 'display: block;');

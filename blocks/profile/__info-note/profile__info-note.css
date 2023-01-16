@@ -1,4 +1,4 @@
-.profile__info_user_note {
+.profile__info-note {
   color: #FFFFFF;
   max-width: 336px;
   margin: 0;
@@ -12,7 +12,7 @@
 
 
 @media screen and (max-width: 768px) {
-  .profile__info_user_note {
+  .profile__info-note {
     text-align: center;
     font-size: 14px;
     line-height: 1.2;

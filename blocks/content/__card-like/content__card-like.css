@@ -1,4 +1,4 @@
-.content__card_mesto_like {
+.content__card-like {
   width: 22px;
   height: 19px;
   align-self: center;
@@ -9,11 +9,11 @@
   background-image: url(../../../../image/Vector__like.svg);
 }
 
-.content__card_mesto_like:hover {
+.content__card-like:hover {
   opacity: 40%;
   cursor: pointer;
 }
 
-.content__card_mesto_like:active {
+.content__card-like:active {
   background-image: url(../../../../image/vector__like_active.svg);
 }

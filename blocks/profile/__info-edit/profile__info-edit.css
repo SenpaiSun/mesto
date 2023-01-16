@@ -1,4 +1,4 @@
-.profile__info_user_edit {
+.profile__info-edit {
   background-color: black;
   background-image: url(../../../../image/Vector_user_edit.svg);
   background-repeat: no-repeat;
@@ -9,13 +9,13 @@
   border: 1px solid #FFFFFF;
 }
 
-.profile__info_user_edit:hover {
+.profile__info-edit:hover {
   opacity: 0.6;
   cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {
-  .profile__info_user_edit {
+  .profile__info-edit {
     width: 18px;
   height: 18px;;
   }
