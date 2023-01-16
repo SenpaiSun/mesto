@@ -8,9 +8,9 @@
   background-image: url(../../../image/Close\ edit.svg);
   background-repeat: no-repeat;
   background-color: rgba(0, 0, 0, 0);
-  cursor: pointer;
 }
 
 .popup__close:hover {
-  opacity: 40%;
+  opacity: 0.6;
+  cursor: pointer;
 }

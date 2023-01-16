@@ -11,6 +11,6 @@
 }
 
 .profile__added:hover {
-  opacity: 40%;
+  opacity: 0.6;
   cursor: pointer;
 }

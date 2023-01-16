@@ -9,3 +9,8 @@
   font-weight: normal;
   line-height: 1.2;
 }
+
+.popup__save:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}

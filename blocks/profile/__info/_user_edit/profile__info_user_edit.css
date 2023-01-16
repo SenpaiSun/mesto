@@ -10,6 +10,6 @@
 }
 
 .profile__info_user_edit:hover {
-  opacity: 40%;
+  opacity: 0.6;
   cursor: pointer;
 }

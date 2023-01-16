@@ -13,3 +13,7 @@
   opacity: 40%;
   cursor: pointer;
 }
+
+.content__card_mesto_like:active {
+  background-image: url(../../../../image/vector__like_active.svg);
+}
