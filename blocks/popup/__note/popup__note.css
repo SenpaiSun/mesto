@@ -6,3 +6,11 @@
   height: 27px;
   margin: 30px auto 0;
 }
+
+@media screen and (max-width: 768px) {
+  .popup__note {
+    width: 238px;
+    font-size: 14px;
+    margin: 27px auto 0;
+  }
+}

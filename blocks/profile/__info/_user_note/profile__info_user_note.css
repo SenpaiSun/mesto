@@ -9,3 +9,14 @@
   overflow: hidden;
   white-space: nowrap;
 }
+
+
+@media screen and (max-width: 768px) {
+  .profile__info_user_note {
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.2;
+    justify-content: center;
+    max-width: 282px;
+  }
+}

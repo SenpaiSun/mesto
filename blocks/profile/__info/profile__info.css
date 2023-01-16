@@ -11,3 +11,13 @@
   grid-template-columns: minmax(min-content, max-content) minmax(min-content, max-content);
   margin: 0;
 }
+
+@media screen and (max-width: 768px) {
+  .profile__info {
+    margin: 28px 0 0;
+    grid-template-columns: minmax(min-content, 282px);
+    grid-template-rows: minmax(min-content, 18px);
+    justify-content: center;
+    max-width: 282px;
+  }
+}

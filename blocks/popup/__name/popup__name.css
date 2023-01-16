@@ -6,3 +6,10 @@
   height: 27px;
   margin: 0 auto;
 }
+
+@media screen and (max-width: 768px) {
+  .popup__name {
+    width: 238px;
+    font-size: 14px;
+  }
+}
