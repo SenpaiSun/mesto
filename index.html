@@ -4,57 +4,46 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/page.css">
+  <link rel="stylesheet" href="./pages/index.css">
   <title>Mesto</title>
 </head>
 <body class="root">
-  <header>
-    <div class="header">
+  <header class="header">
       <img src="./image/mesto_logo.png" class="header__logo" alt="Логотип сервиса Место">
       <hr class="header__line">
-    </div>
   </header>
   <main>
-    <article class="profile">
+    <section class="profile">
       <img class="profile__photo" src="./image/kusto_logo.jpg" alt="Аватар пользователя">
       <div class="profile__info">
         <div class="profile__info-profile">
           <h1 class="profile__info-username">Жак-Ив Кусто</h1>
-          <button class="profile__info-edit"></button>
+          <button class="profile__info-edit" aria-label="Редактировать профиль"></button>
         </div>
         <p class="profile__info-note">Исследователь океана</p>
       </div>
-      <button class="profile__added"></button>
-    </article>
-    <div class="popup">
-      <div class="popup__page">
-        <button class="popup__close"></button>
-        <p class="popup__title">Редактировать профиль</p>
-        <input type="text" class="popup__name">
-        <input type="text" class="popup__note">
-        <button class="popup__save">Сохранить</button>
-      </div>
-    </div>
-    <article class="content" id="content">
+      <button class="profile__added" aria-label="Добавить публикацию"></button>
+    </section>
+    <section class="content" id="content">
       <div class="content__card">
         <img class="content__card-photo" src="./image/DeathValley.jpg" alt="Долина Смерти">
         <div class="content__card-info">
           <h2 class="content__card-name">Долина Смерти</h2>
-          <button class="content__card-like"></button>
+          <button class="content__card-like" aria-label="Поставить лайк"></button>
         </div>
       </div>
       <div class="content__card">
         <img class="content__card-photo" src="./image/ermitage.png" alt="Эрмитаж">
         <div class="content__card-info">
           <h2 class="content__card-name">Эрмитаж</h2>
-          <button class="content__card-like"></button>
+          <button class="content__card-like" aria-label="Поставить лайк"></button>
         </div>
       </div>
       <div class="content__card">
         <img class="content__card-photo" src="./image/GreatWallofChina.jpg" alt="Великая Китайская стена">
         <div class="content__card-info">
           <h2 class="content__card-name">Великая Китайская стена</h2>
-          <button class="content__card-like"></button>
+          <button class="content__card-like" aria-label="Поставить лайк"></button>
         </div>
       </div>
       <div class="content__card">
@@ -75,14 +64,23 @@
         <img class="content__card-photo" src="./image/todai-ji.jpg" alt="Тодай-дзи">
         <div class="content__card-info">
           <h2 class="content__card-name">Тодай-дзи</h2>
-          <button class="content__card-like"></button>
+          <button class="content__card-like" aria-label="Поставить лайк"></button>
         </div>
       </div>
-    </article>
+    </section>
   </main>
-  <footer>
-    <p class="footer">&copy; 2023 Mesto Russia</p>
+  <footer class="footer">
+    <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
   </footer>
+  <div class="popup">
+    <div class="popup__page">
+      <button class="popup__close" aria-label="Закрытие редактирования профиля"></button>
+      <p class="popup__title">Редактировать профиль</p>
+      <input type="text" class="popup__name">
+      <input type="text" class="popup__note">
+      <button class="popup__save" aria-label="Сохранить изменения">Сохранить</button>
+    </div>
+  </div>
   <script src="./scripts/index.js"></script>
 </body>
 </html>
