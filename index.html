@@ -30,16 +30,29 @@
   <footer class="footer">
     <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
   </footer>
-  <div class="popup">
+  <div class="popup popap_edit_profile">
     <div class="popup__page">
       <button class="popup__close" aria-label="Закрытие редактирования профиля"></button>
       <p class="popup__title">Редактировать профиль</p>
-      <input type="text" class="popup__name">
-      <input type="text" class="popup__note">
-      <button class="popup__save" aria-label="Сохранить изменения">Сохранить</button>
+      <form class="popup__form">
+        <input type="text" class="popup__name">
+        <input type="text" class="popup__note">
+        <button class="popup__save" aria-label="Сохранить изменения">Сохранить</button>
+      </form>
     </div>
   </div>
-  <template id="cardTemlate">
+  <div class="popup popup_add_card">
+    <div class="popup__page">
+      <button class="popup__close" aria-label="Закрытие добавление карточки"></button>
+      <p class="popup__title">Новое место</p>
+      <form class="popup__form">
+        <input type="text" class="popup__name" placeholder="Название">
+        <input type="text" class="popup__note" placeholder="Ссылка на картинку">
+        <button type="submit" class="popup__save" aria-label="Сохранить изменения">Создать</button>
+      </form>
+    </div>
+  </div>
+  <template class="cardTemlate">
     <div class="content__card">
       <img class="content__card-photo" src="" alt="">
       <div class="content__card-info">
