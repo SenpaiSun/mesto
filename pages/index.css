@@ -27,3 +27,5 @@
 @import url(../blocks/content/__card-photo/content__card-photo.css);
 @import url(../blocks/content/__card/content__card.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
+@import url(../blocks/popup/__form/popup__form.css);
+@import url(../blocks/content/__card-like-active/content__card-like-active.css);

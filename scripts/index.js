@@ -1,13 +1,17 @@
 const buttonProfile = document.querySelector('.profile__info-edit');
-const buttonClose = document.querySelector('.popup__close');
-const popup = document.querySelector('.popup');
+const buttonCloseProfile = document.querySelector('.popup__close');
+const popupProfile = document.querySelector('.popup');
 const userName = document.querySelector('.profile__info-username');
 const userNote = document.querySelector('.profile__info-note');
 const nameInput = document.querySelector('.popup__name');
 const noteInput = document.querySelector('.popup__note');
-const buttonSave = document.querySelector('.popup__save');
-const cardTemplate = document.querySelector('#cardTemlate').content;
+const buttonSaveProfile = document.querySelector('.popup__save');
+const cardTemplate = document.querySelector('.cardTemlate').content;
 const sectionContent = document.querySelector('.content');
+const popupAddCard = document.querySelector('.popup_add_card');
+const addCardButton = document.querySelector('.profile__added');
+const buttonCloseAddCard = popupAddCard.querySelector('.popup__close')
+const buttonCreateCard = popupAddCard.querySelector('.popup__save');
 
 const saveCard = [
   {
@@ -36,32 +40,54 @@ const saveCard = [
   }
 ];
 
+// Функция на открытие попапа
+function openPopap(item) {
+  item.classList.remove('popup');
+  item.classList.add('popup__close-active');
+}
+
+// Функция на закрытие попапа
+function closePopap(item) {
+  item.classList.remove('popup__close-active');
+  item.classList.add('popup');
+}
+
+// Обработчик на кнопку открытия попапа редактирования профиля
 buttonProfile.addEventListener('click', function () {
-  popup.classList.remove('popup');
-  popup.classList.add('popup__close-active');
+  openPopap(popupProfile)
   nameInput.value = userName.textContent;
   noteInput.value = userNote.textContent;
 });
 
-buttonClose.addEventListener('click', function () {
-  popup.classList.remove('popup__close-active');
-  popup.classList.add('popup');
+// Обработчик на кнопку закрытия попапа редактирования профиля
+buttonCloseProfile.addEventListener('click', function () {
+  closePopap(popupProfile)
 });
 
-buttonSave.addEventListener('click', function eventSave () {
+// Обработчик на кнопку сохранения профиля
+buttonSaveProfile.addEventListener('click', function eventSave (event) {
+  event.preventDefault()
   userName.textContent = nameInput.value;
   userNote.textContent = noteInput.value;
-  popup.classList.remove('popup__close-active');
+  popupProfile.classList.remove('popup__close-active');
 })
 
-popup.addEventListener('keydown', function (event) {
+// Обработчик на нажатие клавиши 'Enter'
+popupProfile.addEventListener('keydown', function (event) {
     if (event.key == 'Enter') {
       userName.textContent = nameInput.value;
       userNote.textContent = noteInput.value;
-      popup.setAttribute('style', 'display: none;')
+      popupProfile.setAttribute('style', 'display: none;')
     }
 })
 
+// Создаем функцию активации/деактивации кнопки like
+const like = (evt) => {
+  evt.target.classList.toggle('content__card-like')
+  evt.target.classList.toggle('content__card-like-active')
+}
+
+// Функция на добавление карточек, с обработчиком функции like
 function defaultCard(array) {
   array.map((item) => {
     const cardTemplateCopy = cardTemplate.querySelector('.content__card').cloneNode(true);
@@ -69,6 +95,35 @@ function defaultCard(array) {
     cardTemplateCopy.querySelector('.content__card-photo').src = item.link;
     cardTemplateCopy.querySelector('.content__card-photo').alt = item.name;
     sectionContent.prepend(cardTemplateCopy)
+    const cardPage = document.querySelector('.content__card');
+    const buttonLike = cardPage.querySelector('.content__card-like');
+    buttonLike.addEventListener('click', like)
   })
 }
+// Вызов функции добавления карточек
 defaultCard(saveCard)
+
+// Обработчик на кнопку добавления нового места
+addCardButton.addEventListener('click', function() {
+  openPopap(popupAddCard)
+})
+
+// Обработчик на кнопку закрытия попапа добавления нового места
+buttonCloseAddCard.addEventListener('click', function() {
+  closePopap(popupAddCard)
+})
+
+// Обработчик на отправку формы и добавления карточки в ленту
+popupAddCard.addEventListener('submit', (item) => {
+  item.preventDefault()
+  const cardName = popupAddCard.querySelector('.popup__name').value
+  const cardLink = popupAddCard.querySelector('.popup__note').value
+  const arrayItem = [{ name: cardName, link: cardLink}]
+  defaultCard(arrayItem)
+  closePopap(popupAddCard)
+})
+
+
+
+
+
