@@ -87,17 +87,23 @@ const like = (evt) => {
   evt.target.classList.toggle('content__card-like-active')
 }
 
-// Функция на добавление карточек, с обработчиком функции like
+const deleteCard = (evt) => {
+  evt.target.closest('.content__card').remove()
+}
+
+// Функция на добавление карточек, с обработчиком функции like и delete
 function defaultCard(array) {
   array.map((item) => {
     const cardTemplateCopy = cardTemplate.querySelector('.content__card').cloneNode(true);
     cardTemplateCopy.querySelector('.content__card-name').textContent = item.name;
     cardTemplateCopy.querySelector('.content__card-photo').src = item.link;
     cardTemplateCopy.querySelector('.content__card-photo').alt = item.name;
-    sectionContent.prepend(cardTemplateCopy)
+    sectionContent.prepend(cardTemplateCopy);
     const cardPage = document.querySelector('.content__card');
     const buttonLike = cardPage.querySelector('.content__card-like');
-    buttonLike.addEventListener('click', like)
+    const buttonDeleteCard = cardPage.querySelector('.content__card-delete');
+    buttonLike.addEventListener('click', like);
+    buttonDeleteCard.addEventListener('click', deleteCard);
   })
 }
 // Вызов функции добавления карточек
