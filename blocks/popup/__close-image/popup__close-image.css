@@ -1,0 +1,28 @@
+.popup__close-image {
+    align-self: end;
+    position: absolute;
+    top: -40px;
+    right: -38px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background-image: url(../../../image/Close\ edit.svg);
+    background-repeat: no-repeat;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.popup__close-image:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .popup__close-image {
+    top: -30px;
+    right: 0px;
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+  }
+}
+

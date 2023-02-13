@@ -30,7 +30,7 @@
   <footer class="footer">
     <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
   </footer>
-  <div class="popup popap_edit_profile">
+  <div class="popup popup__edit-profile">
     <div class="popup__page">
       <button class="popup__close" aria-label="Закрытие редактирования профиля"></button>
       <p class="popup__title">Редактировать профиль</p>
@@ -51,6 +51,13 @@
         <button type="submit" class="popup__save" aria-label="Сохранить изменения">Создать</button>
       </form>
     </div>
+  </div>
+    <div class="popup popup_open_image popup_open_image-class">
+      <div class="popup__image-info">
+        <button class="popup__close-image" aria-label="Закрытие просмотра изображения"></button>
+        <img class="popup__full-image" src="">
+        <p class="popup__text"></p>
+      </div>
   </div>
   <template class="cardTemlate">
     <div class="content__card">
