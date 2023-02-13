@@ -124,6 +124,7 @@ function renderCard(array) {
     document.querySelector('.content__card-photo').addEventListener('click', () => {
       document.querySelector('.popup__text').textContent = item.name;
       document.querySelector('.popup__full-image').src = item.link;
+      document.querySelector('.popup__full-image').alt = item.name;
       document.querySelector('.popup_open_image').setAttribute('style', 'transition: visibility 0.3s, opacity 0.4s linear;')
       openPopupImage()
     })
