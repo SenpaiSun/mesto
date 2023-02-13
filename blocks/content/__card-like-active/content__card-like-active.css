@@ -6,7 +6,7 @@
   margin: 30px 20px 30px auto;
   border: none;
   background-color: #FFFFFF;
-  background-image: url(../../../../image/vector__like_active.svg);
+  background-image: url(../../../image/vector__like_active.svg)
 }
 
 .content__card-like-active:hover {
