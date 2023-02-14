@@ -99,6 +99,10 @@ const createCard = (data) => {
   const createCardCopy = cardTemplate.cloneNode(true);
   const cardImage = createCardCopy.querySelector('.content__card-photo');
   const cardTitle = createCardCopy.querySelector('.content__card-name');
+  // Заполняем клонированный template информацией
+  cardImage.src = data.link;
+  cardImage.alt = data.name;
+  cardTitle.textContent = data.name;
   // Навешиваем обработчик на клик по кнопке лайк, удаления и открытие карточки
   createCardCopy.querySelector('.content__card-like').addEventListener('click', handleLikeClick)
   createCardCopy.querySelector('.content__card-delete').addEventListener('click', deleteCard);
@@ -108,11 +112,6 @@ const createCard = (data) => {
     popupImageOpened.alt = data.name;
     openPopup(popupImage)
   })
-
-  // Заполняем клонированный template информацией
-  cardImage.src = data.link;
-  cardImage.alt = data.name;
-  cardTitle.textContent = data.name;
   return createCardCopy
 }
 
@@ -139,13 +138,13 @@ buttonCloseAddCard.addEventListener('click', function() {
 document.querySelector('.popup__close-image').addEventListener('click', openPopupImage)
 
 // Обработчик на отправку формы и добавления карточки в ленту + очистка формы после отправки
-popupAddCard.addEventListener('submit', (cardItem) => {
-  cardItem.preventDefault()
+popupAddCard.addEventListener('submit', (event) => {
+  event.preventDefault()
   const cardName = popupAddCardName.value
   const cardLink = popupAddCardLink.value
   const arrayItem = [{ name: cardName, link: cardLink}]
-  renderCard(arrayItem)
+  renderCard(arrayItem[0])
   closePopup(popupAddCard)
   popupAddCardName.value = ''
   popupAddCardLink.value = ''
-})
+});
