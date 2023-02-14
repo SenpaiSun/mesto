@@ -1,19 +1,24 @@
 const buttonProfile = document.querySelector('.profile__info-edit');
-const buttonCloseProfile = document.querySelector('.popup__close');
-const popupProfile = document.querySelector('.popup');
+const buttonCloseProfile = document.querySelector('.popup__close-profile');
+const popupProfile = document.querySelector('.popup_edit_profile');
 const userName = document.querySelector('.profile__info-username');
 const userNote = document.querySelector('.profile__info-note');
 const nameInput = document.querySelector('.popup__name');
 const noteInput = document.querySelector('.popup__note');
-const buttonSaveProfile = document.querySelector('.popup__save');
-const cardTemplate = document.querySelector('.cardTemlate').content;
+const cardTemplate = document.querySelector('.card-temlate').content;
+const cardTemplateElement = cardTemplate.querySelector('.content__card');
 const sectionContent = document.querySelector('.content');
 const popupAddCard = document.querySelector('.popup_add_card');
-const addCardButton = document.querySelector('.profile__added');
+const popupAddCardName = popupAddCard.querySelector('.popup__name');
+const popupAddCardLink = popupAddCard.querySelector('.popup__note');
+const buttonAddCard = document.querySelector('.profile__added');
 const buttonCloseAddCard = popupAddCard.querySelector('.popup__close')
+const popupImage = document.querySelector('.popup_open_image')
+const popupImageText = document.querySelector('.popup__text');
+const popupImageOpened = document.querySelector('.popup__full-image');
 
 // Стартовый массив данных карточек
-const saveCard = [
+const cardDefault = [
   {
     name: 'Долина Смерти',
     link: 'https://sarah.lidbom.com/wp-content/uploads/2018/05/IMG_8950.jpg'
@@ -41,26 +46,24 @@ const saveCard = [
 ];
 
 // Функция на открытие попапа
-function openPopup(item) {
-  document.querySelector('.popup').setAttribute('style', 'transition: visibility 0.3s, opacity 0.4s linear;');
-  item.classList.remove('popup');
-  item.classList.add('popup__close-active');
+function openPopup(popup) {
+  popup.classList.toggle('popup__opened');
 }
 
 // Функция на закрытие попапа
-function closePopup(item) {
-  document.querySelector('.popup').setAttribute('style', 'transition: visibility 0.3s, opacity 0.4s linear;')
-  document.querySelector('.popup_add_card').setAttribute('style', 'transition: visibility 0.3s, opacity 0.4s linear;')
-  item.classList.remove('popup__close-active');
-  item.classList.add('popup');
+function closePopup(popup) {
+  popup.classList.toggle('popup__opened');
 }
 
-// Обработчик на кнопку открытия попапа редактирования профиля
-buttonProfile.addEventListener('click', function () {
+// Функция открытия попапа
+function pasteInputValue () {
   openPopup(popupProfile)
   nameInput.value = userName.textContent;
   noteInput.value = userNote.textContent;
-});
+}
+
+// Обработчик на кнопку открытия попапа редактирования профиля
+buttonProfile.addEventListener('click', pasteInputValue);
 
 // Обработчик на кнопку закрытия попапа редактирования профиля
 buttonCloseProfile.addEventListener('click', function () {
@@ -68,27 +71,12 @@ buttonCloseProfile.addEventListener('click', function () {
 });
 
 // Обработчик на кнопку сохранения профиля
-buttonSaveProfile.addEventListener('click', function eventSave (event) {
+popupProfile.addEventListener('submit', function eventSave (event) {
   event.preventDefault()
   userName.textContent = nameInput.value;
   userNote.textContent = noteInput.value;
-  popupProfile.classList.remove('popup__close-active');
+  openPopup(popupProfile)
 })
-
-// Обработчик на нажатие клавиши 'Enter' у попапа изменения профиля
-popupProfile.addEventListener('keydown', function (event) {
-    if (event.key == 'Enter') {
-      userName.textContent = nameInput.value;
-      userNote.textContent = noteInput.value;
-      closePopup(popupProfile)
-    }
-})
-
-// Создаем функцию активации/деактивации кнопки like
-const like = (evt) => {
-  evt.target.classList.toggle('content__card-like')
-  evt.target.classList.toggle('content__card-like-active')
-}
 
 // Создаем функцию кнопки delete
 const deleteCard = (evt) => {
@@ -97,47 +85,48 @@ const deleteCard = (evt) => {
 
 // Активация-дезактивация у попапа открытия изображения
 const openPopupImage = () => {
-  const popupImageActive = document.querySelector('.popup_open_image-class');
-  popupImageActive.classList.toggle('popup_open_image')
-  popupImageActive.classList.toggle('popup_open_image-active')
+  openPopup(popupImage)
 }
 
+// Создаем функцию активации/деактивации кнопки like
+const handleLikeClick = (evt) => {
+  evt.target.classList.toggle('content__card-like-active')
+}
 
-
-// Функция на добавление карточек, с обработчиком функции like и delete, открытием изображение во весь экран
-function renderCard(array) {
-  array.map((item) => {
-    // Записываем значение элемента массива в переменную
-    const arrayItem = item
-    // Делаем копию template элемента
-    const cardTemplateCopy = cardTemplate.querySelector('.content__card').cloneNode(true);
-    // Меняем данные у template на данные из элемента массива
-    cardTemplateCopy.querySelector('.content__card-name').textContent = item.name;
-    cardTemplateCopy.querySelector('.content__card-photo').src = item.link;
-    cardTemplateCopy.querySelector('.content__card-photo').alt = item.name;
-    // Добавляем карточку в template элемент
-    sectionContent.prepend(cardTemplateCopy);
-    // Вешаем обработчик на лайк, удаление карточки
-    document.querySelector('.content__card-like').addEventListener('click', like)
-    document.querySelector('.content__card-delete').addEventListener('click', deleteCard);
-    // Вешаем обработчик на открытие изображения во весь экран. Добавляю transition для дальнейшего плавного закрытия элемента
-    document.querySelector('.content__card-photo').addEventListener('click', () => {
-      document.querySelector('.popup__text').textContent = item.name;
-      document.querySelector('.popup__full-image').src = item.link;
-      document.querySelector('.popup__full-image').alt = item.name;
-      document.querySelector('.popup_open_image').setAttribute('style', 'transition: visibility 0.3s, opacity 0.4s linear;')
-      openPopupImage()
-    })
-    // Вешаем обработчик на закрытие изображения во весь экран
-    document.querySelector('.popup__close-image').addEventListener('click', openPopupImage)
+// Клонируем template, наполняем информацией
+const createCard = (data) => {
+  // Клонируем template
+  const createCardCopy = cardTemplate.cloneNode(true);
+  const cardImage = createCardCopy.querySelector('.content__card-photo');
+  const cardTitle = createCardCopy.querySelector('.content__card-name');
+  // Навешиваем обработчик на клик по кнопке лайк, удаления и открытие карточки
+  createCardCopy.querySelector('.content__card-like').addEventListener('click', handleLikeClick)
+  createCardCopy.querySelector('.content__card-delete').addEventListener('click', deleteCard);
+  createCardCopy.querySelector('.content__card-photo').addEventListener('click', () => {
+    popupImageText.textContent = data.name;
+    popupImageOpened.src = data.link;
+    popupImageOpened.alt = data.name;
+    openPopup(popupImage)
   })
+
+  // Заполняем клонированный template информацией
+  cardImage.src = data.link;
+  cardImage.alt = data.name;
+  cardTitle.textContent = data.name;
+  return createCardCopy
 }
 
-// Вызов функции добавления карточек
-renderCard(saveCard)
+// Вставляем карточку в верстку
+const renderCard = (data) => {
+  const cardElement = createCard(data);
+  sectionContent.prepend(cardElement);
+}
+
+// Мапим дефолтные карточки
+cardDefault.map(card => renderCard(card))
 
 // Обработчик на кнопку добавления нового места
-addCardButton.addEventListener('click', function() {
+buttonAddCard.addEventListener('click', function() {
   openPopup(popupAddCard)
 })
 
@@ -146,29 +135,17 @@ buttonCloseAddCard.addEventListener('click', function() {
   closePopup(popupAddCard)
 })
 
+// Вешаем обработчик на закрытие изображения во весь экран
+document.querySelector('.popup__close-image').addEventListener('click', openPopupImage)
 
 // Обработчик на отправку формы и добавления карточки в ленту + очистка формы после отправки
-popupAddCard.addEventListener('submit', (item) => {
-  item.preventDefault()
-  const cardName = popupAddCard.querySelector('.popup__name').value
-  const cardLink = popupAddCard.querySelector('.popup__note').value
+popupAddCard.addEventListener('submit', (cardItem) => {
+  cardItem.preventDefault()
+  const cardName = popupAddCardName.value
+  const cardLink = popupAddCardLink.value
   const arrayItem = [{ name: cardName, link: cardLink}]
   renderCard(arrayItem)
   closePopup(popupAddCard)
-  popupAddCard.querySelector('.popup__name').value = ''
-  popupAddCard.querySelector('.popup__note').value = ''
+  popupAddCardName.value = ''
+  popupAddCardLink.value = ''
 })
-
-// Обработчик на нажатие клавиши 'Enter' у попапа изменения профиля
-popupAddCard.addEventListener('keydown', function (event) {
-  if (event.key == 'Enter') {
-    const cardName = popupAddCard.querySelector('.popup__name').value
-    const cardLink = popupAddCard.querySelector('.popup__note').value
-    const arrayItem = [{ name: cardName, link: cardLink}]
-    renderCard(arrayItem)
-    closePopup(popupAddCard)
-    popupAddCard.querySelector('.popup__name').value = ''
-    popupAddCard.querySelector('.popup__note').value = ''
-  }
-})
-

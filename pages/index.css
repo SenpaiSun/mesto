@@ -14,7 +14,7 @@
 @import url(../blocks/profile/__photo/profile__photo.css);
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/__close/popup__close.css);
-@import url(../blocks/popup/__close-active/popup__close-active.css);
+@import url(../blocks/popup/__opened/popup__opened.css);
 @import url(../blocks/popup/__name/popup__name.css);
 @import url(../blocks/popup/__save/popup__save.css);
 @import url(../blocks/popup/__note/popup__note.css);
