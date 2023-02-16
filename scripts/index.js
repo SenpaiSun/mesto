@@ -96,23 +96,23 @@ const handleLikeClick = (evt) => {
 // Клонируем template, наполняем информацией
 const createCard = (data) => {
   // Клонируем template
-  const createCardCopy = cardTemplate.cloneNode(true);
-  const cardImage = createCardCopy.querySelector('.content__card-photo');
-  const cardTitle = createCardCopy.querySelector('.content__card-name');
+  const cardCopyTemplate = cardTemplate.cloneNode(true);
+  const cardImage = cardCopyTemplate.querySelector('.content__card-photo');
+  const cardTitle = cardCopyTemplate.querySelector('.content__card-name');
   // Заполняем клонированный template информацией
   cardImage.src = data.link;
   cardImage.alt = data.name;
   cardTitle.textContent = data.name;
   // Навешиваем обработчик на клик по кнопке лайк, удаления и открытие карточки
-  createCardCopy.querySelector('.content__card-like').addEventListener('click', handleLikeClick)
-  createCardCopy.querySelector('.content__card-delete').addEventListener('click', deleteCard);
-  createCardCopy.querySelector('.content__card-photo').addEventListener('click', () => {
+  cardCopyTemplate.querySelector('.content__card-like').addEventListener('click', handleLikeClick)
+  cardCopyTemplate.querySelector('.content__card-delete').addEventListener('click', deleteCard);
+  cardImage.addEventListener('click', () => {
     popupImageText.textContent = data.name;
     popupImageOpened.src = data.link;
     popupImageOpened.alt = data.name;
     openPopup(popupImage)
   })
-  return createCardCopy
+  return cardCopyTemplate
 }
 
 // Вставляем карточку в верстку
@@ -142,8 +142,7 @@ popupAddCard.addEventListener('submit', (event) => {
   event.preventDefault()
   const cardName = popupAddCardName.value
   const cardLink = popupAddCardLink.value
-  const arrayItem = [{ name: cardName, link: cardLink}]
-  renderCard(arrayItem[0])
+  renderCard({ name: cardName, link: cardLink })
   closePopup(popupAddCard)
   popupAddCardName.value = ''
   popupAddCardLink.value = ''
