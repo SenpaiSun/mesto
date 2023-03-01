@@ -45,14 +45,24 @@ const cardDefault = [
   }
 ];
 
-// Функция на открытие попапа
+// Функция, которая ищет popup по селектору и вызывает функцию закрытия popup
+const closeEscapeKey = (evt) => {
+  if (evt.key === 'Escape') {
+    const openPopup = document.querySelector('.popup__opened')
+    closePopup(openPopup)
+  }
+}
+
+// Функция на открытие попапа и закрытия при нажатии на Esc
 function openPopup(popup) {
   popup.classList.toggle('popup__opened');
+  document.addEventListener('keydown', closeEscapeKey)
 }
 
 // Функция на закрытие попапа
 function closePopup(popup) {
   popup.classList.toggle('popup__opened');
+  document.removeEventListener('keydown', closeEscapeKey)
 }
 
 // Функция открытия попапа
@@ -144,6 +154,24 @@ popupAddCard.addEventListener('submit', (event) => {
   const cardLink = popupAddCardLink.value
   renderCard({ name: cardName, link: cardLink })
   closePopup(popupAddCard)
-  popupAddCardName.value = ''
-  popupAddCardLink.value = ''
+  event.target.reset()
 });
+
+// Обработчики закрытия попапа на оверлей
+popupProfile.addEventListener('mousedown', (evt) => {
+  if (evt.currentTarget === evt.target && evt.currentTarget.classList.contains('popup__opened')) {
+    closePopup(popupProfile)
+  }
+})
+
+popupAddCard.addEventListener('mousedown', (evt) => {
+  if (evt.currentTarget === evt.target && evt.currentTarget.classList.contains('popup__opened')) {
+    closePopup(popupAddCard)
+  }
+})
+
+popupImage.addEventListener('mousedown', (evt) => {
+  if (evt.currentTarget === evt.target && evt.currentTarget.classList.contains('popup__opened')) {
+    closePopup(popupImage)
+  }
+})
