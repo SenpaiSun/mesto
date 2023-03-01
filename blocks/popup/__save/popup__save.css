@@ -1,7 +1,7 @@
 .popup__save {
   width: 358px;
   height: 50px;
-  margin: 46px auto 37px;
+  margin: 0 auto 37px;
   border: 0;
   border-radius: 2px;
   background-color: #000;
@@ -21,5 +21,6 @@
     width: 238px;
     height: 46px;
     font-size: 14px;
+    margin-top: 0px;
   }
 }

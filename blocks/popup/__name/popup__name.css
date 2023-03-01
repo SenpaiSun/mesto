@@ -5,6 +5,7 @@
   width: 358px;
   height: 27px;
   margin: 0 auto;
+  font-size: 14px;
 }
 
 @media screen and (max-width: 768px) {
