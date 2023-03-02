@@ -16,6 +16,9 @@ const buttonCloseAddCard = popupAddCard.querySelector('.popup__close')
 const popupImage = document.querySelector('.popup_open_image')
 const popupImageText = document.querySelector('.popup__text');
 const popupImageOpened = document.querySelector('.popup__full-image');
+const popupCloseImage = document.querySelector('.popup__close-image')
+const errorElements = document.querySelectorAll('.popup__input-error');
+const errorInputBorder = document.querySelectorAll('.form__input');
 
 // Функция, которая ищет popup по селектору и вызывает функцию закрытия popup
 const closeEscapeKey = (evt) => {
@@ -35,6 +38,8 @@ function openPopup(popup) {
 function closePopup(popup) {
   popup.classList.toggle('popup__opened');
   document.removeEventListener('keydown', closeEscapeKey)
+  document.querySelector('#form-card').reset()
+  removeValidation()
 }
 
 // Функция открытия попапа
@@ -66,8 +71,8 @@ const deleteCard = (evt) => {
 }
 
 // Активация-дезактивация у попапа открытия изображения
-const openPopupImage = () => {
-  openPopup(popupImage)
+const togglePopupImage = () => {
+  closePopup(popupImage)
 }
 
 // Создаем функцию активации/деактивации кнопки like
@@ -111,13 +116,24 @@ buttonAddCard.addEventListener('click', function() {
   openPopup(popupAddCard)
 })
 
+// Функция, которая удаляет все ошибки валидации
+const removeValidation = () => {
+  errorInputBorder.forEach((item) => {
+    item.classList.remove('popup__input_type_error')
+  })
+  errorElements.forEach((item) => {
+    item.classList.remove('popup__input-error-active')
+    item.textContent = ''
+  })
+}
+
 // Обработчик на кнопку закрытия попапа добавления нового места
 buttonCloseAddCard.addEventListener('click', function() {
   closePopup(popupAddCard)
 })
 
 // Вешаем обработчик на закрытие изображения во весь экран
-document.querySelector('.popup__close-image').addEventListener('click', openPopupImage)
+popupCloseImage.addEventListener('click', togglePopupImage)
 
 // Обработчик на отправку формы и добавления карточки в ленту + очистка формы после отправки
 popupAddCard.addEventListener('submit', (event) => {
