@@ -7,6 +7,17 @@ const config = {
   formItem: '.form'
 }
 
+// Функция, которая удаляет все ошибки валидации
+const removeValidation = (formInput, formSpan) => {
+  formInput.forEach((item) => {
+    item.classList.remove('popup__input_type_error')
+  })
+  formSpan.forEach((item) => {
+    item.classList.remove('popup__input-error-active')
+    item.textContent = ''
+  })
+}
+
 // Проверяем input на валидацию
 const isValid = (formElement, inputElement) => {
   if (!inputElement.validity.valid) {
@@ -69,7 +80,7 @@ const setEventListeners = (formElement) => {
 }
 
 // Передаем в каждую форму функцию, с помощью которой будет навешан обработчик
-function enableValidation () {
+function enableValidation (config) {
   const formList = Array.from(document.querySelectorAll(config.formItem))
   formList.forEach((formElement) => {
     setEventListeners(formElement)

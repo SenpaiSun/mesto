@@ -17,8 +17,12 @@ const popupImage = document.querySelector('.popup_open_image')
 const popupImageText = document.querySelector('.popup__text');
 const popupImageOpened = document.querySelector('.popup__full-image');
 const popupCloseImage = document.querySelector('.popup__close-image')
-const errorElements = document.querySelectorAll('.popup__input-error');
-const errorInputBorder = document.querySelectorAll('.form__input');
+const formProfile = document.querySelector('#form-profile');
+const formCard = document.querySelector('#form-card');
+const errorInputCard = formCard.querySelectorAll('.form__input');
+const errorSpanCard = formCard.querySelectorAll('.popup__input-error');
+const errorInputProfile = formProfile.querySelectorAll('.form__input');
+const errorSpanProfile = formProfile.querySelectorAll('.popup__input-error');
 
 // Функция, которая ищет popup по селектору и вызывает функцию закрытия popup
 const closeEscapeKey = (evt) => {
@@ -38,8 +42,6 @@ function openPopup(popup) {
 function closePopup(popup) {
   popup.classList.toggle('popup__opened');
   document.removeEventListener('keydown', closeEscapeKey)
-  document.querySelector('#form-card').reset()
-  removeValidation()
 }
 
 // Функция открытия попапа
@@ -47,6 +49,7 @@ function pasteInputValue () {
   openPopup(popupProfile)
   nameInput.value = userName.textContent;
   noteInput.value = userNote.textContent;
+  removeValidation(errorInputProfile, errorSpanProfile)
 }
 
 // Обработчик на кнопку открытия попапа редактирования профиля
@@ -114,18 +117,9 @@ cardDefault.map(card => renderCard(card))
 // Обработчик на кнопку добавления нового места
 buttonAddCard.addEventListener('click', function() {
   openPopup(popupAddCard)
+  formCard.reset()
+  removeValidation(errorInputCard, errorSpanCard)
 })
-
-// Функция, которая удаляет все ошибки валидации
-const removeValidation = () => {
-  errorInputBorder.forEach((item) => {
-    item.classList.remove('popup__input_type_error')
-  })
-  errorElements.forEach((item) => {
-    item.classList.remove('popup__input-error-active')
-    item.textContent = ''
-  })
-}
 
 // Обработчик на кнопку закрытия попапа добавления нового места
 buttonCloseAddCard.addEventListener('click', function() {
