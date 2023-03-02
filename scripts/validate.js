@@ -35,7 +35,7 @@ const hasInvalidInput = (inputList) => {
 }
 
 // Создаем условие по которому будет блокироваться/разблокироваться button
-const toggleButtonState = (inputList, buttonElement) => {
+const toggleButtonState = (inputList, buttonElement, config) => {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(config.buttonClass)
     buttonElement.setAttribute('disabled', 'disabled')
@@ -46,7 +46,7 @@ const toggleButtonState = (inputList, buttonElement) => {
 }
 
 // Показываем сообщение об ошибке путем добавления классов и сообщения об ошибке
-const showError = (formElement, inputElement, errorMessage) => {
+const showError = (formElement, inputElement, errorMessage, config) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`)
   inputElement.classList.add(config.errorClass)
   errorElement.textContent = errorMessage
@@ -54,7 +54,7 @@ const showError = (formElement, inputElement, errorMessage) => {
 }
 
 // Скрываем сообщение об ошибке
-const hideError = (formElement, inputElement) => {
+const hideError = (formElement, inputElement, config) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`)
   inputElement.classList.remove(config.errorClass)
   errorElement.classList.remove(config.errorClassActive)
@@ -62,7 +62,7 @@ const hideError = (formElement, inputElement) => {
 }
 
 // Навешивам обработчик на все input, вызываем функцию блокирования кнопки при открытии попапа
-const setEventListeners = (formElement) => {
+const setEventListeners = (formElement, config) => {
   const inputList = Array.from(formElement.querySelectorAll(config.inputForm))
   const buttonElement = formElement.querySelector(config.buttonForm)
   toggleButtonState(inputList, buttonElement)
