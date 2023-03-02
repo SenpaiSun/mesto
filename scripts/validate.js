@@ -1,4 +1,4 @@
-const config = {
+const configs = {
   buttonClass: 'popup__save-inactive',
   errorClass: 'popup__input_type_error',
   errorClassActive: 'popup__input-error-active',
@@ -19,11 +19,11 @@ const removeValidation = (formInput, formSpan) => {
 }
 
 // Проверяем input на валидацию
-const isValid = (formElement, inputElement) => {
+const isValid = (formElement, inputElement, config) => {
   if (!inputElement.validity.valid) {
-    showError(formElement, inputElement, inputElement.validationMessage)
+    showError(formElement, inputElement, inputElement.validationMessage, config)
   } else {
-    hideError(formElement, inputElement)
+    hideError(formElement, inputElement, config)
   }
 }
 
@@ -65,16 +65,16 @@ const hideError = (formElement, inputElement, config) => {
 const setEventListeners = (formElement, config) => {
   const inputList = Array.from(formElement.querySelectorAll(config.inputForm))
   const buttonElement = formElement.querySelector(config.buttonForm)
-  toggleButtonState(inputList, buttonElement)
+  toggleButtonState(inputList, buttonElement, config)
   formElement.addEventListener('reset', () => {
     setTimeout(() => {
-      toggleButtonState(inputList, buttonElement)
+      toggleButtonState(inputList, buttonElement, config)
     }, 0)
   })
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
-      isValid(formElement, inputElement)
-      toggleButtonState(inputList, buttonElement)
+      isValid(formElement, inputElement, config)
+      toggleButtonState(inputList, buttonElement, config)
     })
   })
 }
@@ -83,9 +83,9 @@ const setEventListeners = (formElement, config) => {
 function enableValidation (config) {
   const formList = Array.from(document.querySelectorAll(config.formItem))
   formList.forEach((formElement) => {
-    setEventListeners(formElement)
+    setEventListeners(formElement, config)
     })
 }
 
 // Вызываем функцию
-enableValidation(config)
+enableValidation(configs)
