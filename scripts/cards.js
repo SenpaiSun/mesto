@@ -1,5 +1,5 @@
 // Стартовый массив данных карточек
-const cardDefault = [
+export const cardDefault = [
   {
     name: 'Долина Смерти',
     link: 'https://sarah.lidbom.com/wp-content/uploads/2018/05/IMG_8950.jpg'

@@ -1,3 +1,7 @@
+import {Card} from './Card.js'
+import {cardDefault} from './cards.js'
+import {FormValidator, configs} from './validate.js'
+
 const buttonProfile = document.querySelector('.profile__info-edit');
 const buttonCloseProfile = document.querySelector('.popup__close-profile');
 const popupProfile = document.querySelector('.popup_edit_profile');
@@ -23,6 +27,8 @@ const errorInputCard = formCard.querySelectorAll('.form__input');
 const errorSpanCard = formCard.querySelectorAll('.popup__input-error');
 const errorInputProfile = formProfile.querySelectorAll('.form__input');
 const errorSpanProfile = formProfile.querySelectorAll('.popup__input-error');
+const popupFormProfile = popupProfile.querySelector('.popup__form')
+const popupFormCard = popupAddCard.querySelector('.popup__form')
 
 // Функция, которая ищет popup по селектору и вызывает функцию закрытия popup
 const closeEscapeKey = (evt) => {
@@ -40,7 +46,7 @@ function openPopup(popup) {
 
 // Функция на закрытие попапа
 function closePopup(popup) {
-  popup.classList.toggle('popup__opened');
+  popup.classList.remove('popup__opened');
   document.removeEventListener('keydown', closeEscapeKey)
 }
 
@@ -49,7 +55,7 @@ function pasteInputValue () {
   openPopup(popupProfile)
   nameInput.value = userName.textContent;
   noteInput.value = userNote.textContent;
-  removeValidation(errorInputProfile, errorSpanProfile)
+  formValidationProfile.removeValidation(errorInputProfile, errorSpanProfile)
 }
 
 // Обработчик на кнопку открытия попапа редактирования профиля
@@ -68,57 +74,21 @@ popupProfile.addEventListener('submit', function eventSave (event) {
   openPopup(popupProfile)
 })
 
-// Создаем функцию кнопки delete
-const deleteCard = (evt) => {
-  evt.target.closest('.content__card').remove()
-}
-
-// Активация-дезактивация у попапа открытия изображения
-const togglePopupImage = () => {
-  closePopup(popupImage)
-}
-
-// Создаем функцию активации/деактивации кнопки like
-const handleLikeClick = (evt) => {
-  evt.target.classList.toggle('content__card-like-active')
-}
-
-// Клонируем template, наполняем информацией
-const createCard = (data) => {
-  // Клонируем template
-  const cardCopyTemplate = cardTemplate.cloneNode(true);
-  const cardImage = cardCopyTemplate.querySelector('.content__card-photo');
-  const cardTitle = cardCopyTemplate.querySelector('.content__card-name');
-  // Заполняем клонированный template информацией
-  cardImage.src = data.link;
-  cardImage.alt = data.name;
-  cardTitle.textContent = data.name;
-  // Навешиваем обработчик на клик по кнопке лайк, удаления и открытие карточки
-  cardCopyTemplate.querySelector('.content__card-like').addEventListener('click', handleLikeClick)
-  cardCopyTemplate.querySelector('.content__card-delete').addEventListener('click', deleteCard);
-  cardImage.addEventListener('click', () => {
-    popupImageText.textContent = data.name;
-    popupImageOpened.src = data.link;
-    popupImageOpened.alt = data.name;
-    openPopup(popupImage)
-  })
-  return cardCopyTemplate
-}
 
 // Вставляем карточку в верстку
-const renderCard = (data) => {
-  const cardElement = createCard(data);
+const renderCard = (name, link) => {
+  const cardElement = new Card(name, link, '.card-temlate').renderCard();
   sectionContent.prepend(cardElement);
 }
 
 // Мапим дефолтные карточки
-cardDefault.map(card => renderCard(card))
+cardDefault.map(card => renderCard(card.name, card.link))
 
 // Обработчик на кнопку добавления нового места
 buttonAddCard.addEventListener('click', function() {
   openPopup(popupAddCard)
   formCard.reset()
-  removeValidation(errorInputCard, errorSpanCard)
+  formValidationCard.removeValidation(errorInputCard, errorSpanCard)
 })
 
 // Обработчик на кнопку закрытия попапа добавления нового места
@@ -126,15 +96,13 @@ buttonCloseAddCard.addEventListener('click', function() {
   closePopup(popupAddCard)
 })
 
-// Вешаем обработчик на закрытие изображения во весь экран
-popupCloseImage.addEventListener('click', togglePopupImage)
 
 // Обработчик на отправку формы и добавления карточки в ленту + очистка формы после отправки
 popupAddCard.addEventListener('submit', (event) => {
   event.preventDefault()
   const cardName = popupAddCardName.value
   const cardLink = popupAddCardLink.value
-  renderCard({ name: cardName, link: cardLink })
+  renderCard(cardName, cardLink)
   closePopup(popupAddCard)
   event.target.reset()
 });
@@ -157,3 +125,11 @@ popupImage.addEventListener('mousedown', (evt) => {
     closePopup(popupImage)
   }
 })
+
+const formValidationProfile = new FormValidator(configs, popupFormProfile)
+formValidationProfile.enableValidation()
+
+const formValidationCard = new FormValidator(configs, popupFormCard)
+formValidationCard.enableValidation()
+
+export {cardTemplate, popupImageText, popupImageOpened, openPopup, closePopup, popupImage, popupCloseImage}
