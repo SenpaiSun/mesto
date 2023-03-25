@@ -1,6 +1,6 @@
 import {Card} from './Card.js'
 import {cardDefault} from './cards.js'
-import {FormValidator, configs} from './validate.js'
+import {FormValidator} from './FormValidate.js'
 
 const buttonProfile = document.querySelector('.profile__info-edit');
 const buttonCloseProfile = document.querySelector('.popup__close-profile');
@@ -29,6 +29,15 @@ const errorInputProfile = formProfile.querySelectorAll('.form__input');
 const errorSpanProfile = formProfile.querySelectorAll('.popup__input-error');
 const popupFormProfile = popupProfile.querySelector('.popup__form')
 const popupFormCard = popupAddCard.querySelector('.popup__form')
+
+  const config = {
+  buttonClass: 'popup__save-inactive',
+  errorClass: 'popup__input_type_error',
+  errorClassActive: 'popup__input-error-active',
+  inputForm: '.form__input',
+  buttonForm: '.popup__save',
+  formItem: '.form'
+}
 
 // Функция, которая ищет popup по селектору и вызывает функцию закрытия popup
 const closeEscapeKey = (evt) => {
@@ -74,15 +83,27 @@ popupProfile.addEventListener('submit', function eventSave (event) {
   openPopup(popupProfile)
 })
 
+function handleOpenCard(name, link) {
+  popupImageOpened.src = link;
+  popupImageOpened.alt = name;
+  popupImageText.textContent = name;
+  openPopup(popupImage);
+}
+
+
+function createCard(name, link) {
+  const cardElement = new Card(name, link, '.card-temlate', handleOpenCard).renderCard();
+  return cardElement
+}
 
 // Вставляем карточку в верстку
 const renderCard = (name, link) => {
-  const cardElement = new Card(name, link, '.card-temlate').renderCard();
+  const cardElement = createCard(name, link);
   sectionContent.prepend(cardElement);
 }
 
-// Мапим дефолтные карточки
-cardDefault.map(card => renderCard(card.name, card.link))
+// Создаем дефолтные карточки
+cardDefault.forEach(card => renderCard(card.name, card.link))
 
 // Обработчик на кнопку добавления нового места
 buttonAddCard.addEventListener('click', function() {
@@ -104,32 +125,35 @@ popupAddCard.addEventListener('submit', (event) => {
   const cardLink = popupAddCardLink.value
   renderCard(cardName, cardLink)
   closePopup(popupAddCard)
-  event.target.reset()
 });
 
 // Обработчики закрытия попапа на оверлей
 popupProfile.addEventListener('mousedown', (evt) => {
-  if (evt.currentTarget === evt.target && evt.currentTarget.classList.contains('popup__opened')) {
+  if (evt.currentTarget === evt.target) {
     closePopup(popupProfile)
   }
 })
 
+popupCloseImage.addEventListener('click', () => {
+  closePopup(popupImage)
+})
+
 popupAddCard.addEventListener('mousedown', (evt) => {
-  if (evt.currentTarget === evt.target && evt.currentTarget.classList.contains('popup__opened')) {
+  if (evt.currentTarget === evt.target) {
     closePopup(popupAddCard)
   }
 })
 
 popupImage.addEventListener('mousedown', (evt) => {
-  if (evt.currentTarget === evt.target && evt.currentTarget.classList.contains('popup__opened')) {
+  if (evt.currentTarget === evt.target) {
     closePopup(popupImage)
   }
 })
 
-const formValidationProfile = new FormValidator(configs, popupFormProfile)
+const formValidationProfile = new FormValidator(config, popupFormProfile)
 formValidationProfile.enableValidation()
 
-const formValidationCard = new FormValidator(configs, popupFormCard)
+const formValidationCard = new FormValidator(config, popupFormCard)
 formValidationCard.enableValidation()
 
-export {cardTemplate, popupImageText, popupImageOpened, openPopup, closePopup, popupImage, popupCloseImage}
+export {cardTemplate, popupImageText, popupImageOpened, openPopup, popupImage, handleOpenCard}

@@ -1,12 +1,3 @@
-export const configs = {
-  buttonClass: 'popup__save-inactive',
-  errorClass: 'popup__input_type_error',
-  errorClassActive: 'popup__input-error-active',
-  inputForm: '.form__input',
-  buttonForm: '.popup__save',
-  formItem: '.form'
-}
-
 export class FormValidator {
   constructor(config, formElement) {
     this._config = config;
@@ -23,12 +14,12 @@ export class FormValidator {
   }
 
 // Функция, которая удаляет все ошибки валидации
-  removeValidation(formInput, formSpan) {
+  removeValidation(formInput, formSpan, config) {
     formInput.forEach((item) => {
-      item.classList.remove('popup__input_type_error')
+      item.classList.remove(this._config.errorClass)
     })
     formSpan.forEach((item) => {
-      item.classList.remove('popup__input-error-active')
+      item.classList.remove(this._config.errorClassActive)
       item.textContent = ''
     })
   }
@@ -36,16 +27,16 @@ export class FormValidator {
   // Создаем условие по которому будет блокироваться/разблокироваться button
   _toggleButtonState(inputList, buttonElement, config) {
     if (this._hasInvalidInput(this._inputList)) {
-      this._buttonElement.classList.add(config.buttonClass)
+      this._buttonElement.classList.add(this._config.buttonClass)
       this._buttonElement.setAttribute('disabled', 'disabled')
     } else {
-      this._buttonElement.classList.remove(config.buttonClass)
+      this._buttonElement.classList.remove(this._config.buttonClass)
       this._buttonElement.removeAttribute('disabled')
     }
   }
 
 // Проверяем input на валидацию
-  _isValid(formElement, inputElement, config) {
+  _isValid(inputElement) {
     if (!inputElement.validity.valid) {
       this._showError(this._formElement, inputElement, inputElement.validationMessage, this._config)
     } else {
@@ -70,27 +61,23 @@ export class FormValidator {
 
 // Навешивам обработчик на все input, вызываем функцию блокирования кнопки при открытии попапа
 _setEventListeners(formElement, config) {
-  this._toggleButtonState(this._inputList, this._buttonElement, this._config)
+  this._toggleButtonState()
   this._formElement.addEventListener('reset', () => {
     setTimeout(() => {
-      this._toggleButtonState(this._inputList, this._buttonElement, this._config)
+      this._toggleButtonState()
     }, 0)
   })
   this._inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
-      this._isValid(this._formElement, inputElement, this._config)
-      this._toggleButtonState(this._inputList, this._buttonElement, this._config)
+      this._isValid(inputElement)
+      this._toggleButtonState()
     })
   })
 }
 
 // Передаем в каждую форму функцию, с помощью которой будет навешан обработчик
 enableValidation(config, formElement) {
-  const formList = Array.from(document.querySelectorAll(this._config.formItem))
-  formList.forEach((formElement) => {
-    this._setEventListeners(formElement, this._config)
-    })
+  this._setEventListeners();
 }
-
 }
 
