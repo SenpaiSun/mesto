@@ -1,14 +1,7 @@
 .popup__close-image {
-    align-self: end;
-    position: absolute;
     top: -40px;
+    left: auto;
     right: -38px;
-    width: 32px;
-    height: 32px;
-    border: none;
-    background-image: url(../../../image/Close\ edit.svg);
-    background-repeat: no-repeat;
-    background-color: rgba(0, 0, 0, 0);
 }
 
 .popup__close-image:hover {

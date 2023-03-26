@@ -10,7 +10,6 @@ const userNote = document.querySelector('.profile__info-note');
 const nameInput = document.querySelector('.popup__name');
 const noteInput = document.querySelector('.popup__note');
 const cardTemplate = document.querySelector('.card-temlate').content;
-const cardTemplateElement = cardTemplate.querySelector('.content__card');
 const sectionContent = document.querySelector('.content');
 const popupAddCard = document.querySelector('.popup_add_card');
 const popupAddCardName = popupAddCard.querySelector('.popup__name');
@@ -20,7 +19,6 @@ const buttonCloseAddCard = popupAddCard.querySelector('.popup__close')
 const popupImage = document.querySelector('.popup_open_image')
 const popupImageText = document.querySelector('.popup__text');
 const popupImageOpened = document.querySelector('.popup__full-image');
-const popupCloseImage = document.querySelector('.popup__close-image')
 const formProfile = document.querySelector('#form-profile');
 const formCard = document.querySelector('#form-card');
 const errorInputCard = formCard.querySelectorAll('.form__input');
@@ -29,6 +27,7 @@ const errorInputProfile = formProfile.querySelectorAll('.form__input');
 const errorSpanProfile = formProfile.querySelectorAll('.popup__input-error');
 const popupFormProfile = popupProfile.querySelector('.popup__form')
 const popupFormCard = popupAddCard.querySelector('.popup__form')
+const buttonCloseList = document.querySelectorAll('.popup__close')
 
   const config = {
   buttonClass: 'popup__save-inactive',
@@ -70,11 +69,6 @@ function pasteInputValue () {
 // Обработчик на кнопку открытия попапа редактирования профиля
 buttonProfile.addEventListener('click', pasteInputValue);
 
-// Обработчик на кнопку закрытия попапа редактирования профиля
-buttonCloseProfile.addEventListener('click', function () {
-  closePopup(popupProfile)
-});
-
 // Обработчик на кнопку сохранения профиля
 popupProfile.addEventListener('submit', function eventSave (event) {
   event.preventDefault()
@@ -112,12 +106,6 @@ buttonAddCard.addEventListener('click', function() {
   formValidationCard.removeValidation(errorInputCard, errorSpanCard)
 })
 
-// Обработчик на кнопку закрытия попапа добавления нового места
-buttonCloseAddCard.addEventListener('click', function() {
-  closePopup(popupAddCard)
-})
-
-
 // Обработчик на отправку формы и добавления карточки в ленту + очистка формы после отправки
 popupAddCard.addEventListener('submit', (event) => {
   event.preventDefault()
@@ -127,27 +115,14 @@ popupAddCard.addEventListener('submit', (event) => {
   closePopup(popupAddCard)
 });
 
-// Обработчики закрытия попапа на оверлей
-popupProfile.addEventListener('mousedown', (evt) => {
-  if (evt.currentTarget === evt.target) {
-    closePopup(popupProfile)
-  }
-})
-
-popupCloseImage.addEventListener('click', () => {
-  closePopup(popupImage)
-})
-
-popupAddCard.addEventListener('mousedown', (evt) => {
-  if (evt.currentTarget === evt.target) {
-    closePopup(popupAddCard)
-  }
-})
-
-popupImage.addEventListener('mousedown', (evt) => {
-  if (evt.currentTarget === evt.target) {
-    closePopup(popupImage)
-  }
+buttonCloseList.forEach(item => {
+  const popupClose = item.closest('.popup');
+  popupClose.addEventListener('mousedown', (evt) => {
+    if (evt.currentTarget === evt.target) {
+      closePopup(popupClose)
+    }
+  });
+  item.addEventListener('click', () => closePopup(popupClose));
 })
 
 const formValidationProfile = new FormValidator(config, popupFormProfile)

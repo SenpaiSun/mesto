@@ -6,27 +6,21 @@ export class FormValidator {
     this._buttonElement = this._formElement.querySelector(this._config.buttonForm);
   }
 
-  _showError(formElement, inputElement, errorMessage, config) {
+  _showError(inputElement, errorMessage) {
       const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`)
-      inputElement.classList.add(config.errorClass)
+      inputElement.classList.add(this._config.errorClass)
       errorElement.textContent = errorMessage
-      errorElement.classList.add(config.errorClassActive)
+      errorElement.classList.add(this._config.errorClassActive)
   }
 
 // Функция, которая удаляет все ошибки валидации
-  removeValidation(formInput, formSpan, config) {
-    formInput.forEach((item) => {
-      item.classList.remove(this._config.errorClass)
-    })
-    formSpan.forEach((item) => {
-      item.classList.remove(this._config.errorClassActive)
-      item.textContent = ''
-    })
+  removeValidation() {
+    this._inputList.forEach(inputElement => this._hideError(inputElement));
   }
 
   // Создаем условие по которому будет блокироваться/разблокироваться button
-  _toggleButtonState(inputList, buttonElement, config) {
-    if (this._hasInvalidInput(this._inputList)) {
+  _toggleButtonState() {
+    if (this._hasInvalidInput()) {
       this._buttonElement.classList.add(this._config.buttonClass)
       this._buttonElement.setAttribute('disabled', 'disabled')
     } else {
@@ -38,21 +32,21 @@ export class FormValidator {
 // Проверяем input на валидацию
   _isValid(inputElement) {
     if (!inputElement.validity.valid) {
-      this._showError(this._formElement, inputElement, inputElement.validationMessage, this._config)
+      this._showError(inputElement, inputElement.validationMessage)
     } else {
-      this._hideError(this._formElement, inputElement, this._config)
+      this._hideError(inputElement)
     }
   }
 
 // Проверяем все input на соответствие валидации
-  _hasInvalidInput(inputList) {
+  _hasInvalidInput() {
   return this._inputList.some((inputElement) => {
   return !inputElement.validity.valid
   })
 }
 
 // Скрываем сообщение об ошибке
-  _hideError(formElement, inputElement, config) {
+  _hideError(inputElement) {
   const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`)
   inputElement.classList.remove(this._config.errorClass)
   errorElement.classList.remove(this._config.errorClassActive)
@@ -60,7 +54,7 @@ export class FormValidator {
 }
 
 // Навешивам обработчик на все input, вызываем функцию блокирования кнопки при открытии попапа
-_setEventListeners(formElement, config) {
+_setEventListeners() {
   this._toggleButtonState()
   this._formElement.addEventListener('reset', () => {
     setTimeout(() => {
@@ -76,7 +70,7 @@ _setEventListeners(formElement, config) {
 }
 
 // Передаем в каждую форму функцию, с помощью которой будет навешан обработчик
-enableValidation(config, formElement) {
+enableValidation() {
   this._setEventListeners();
 }
 }
