@@ -3,7 +3,6 @@ import {cardDefault} from './cards.js'
 import {FormValidator} from './FormValidate.js'
 
 const buttonProfile = document.querySelector('.profile__info-edit');
-const buttonCloseProfile = document.querySelector('.popup__close-profile');
 const popupProfile = document.querySelector('.popup_edit_profile');
 const userName = document.querySelector('.profile__info-username');
 const userNote = document.querySelector('.profile__info-note');
@@ -15,7 +14,6 @@ const popupAddCard = document.querySelector('.popup_add_card');
 const popupAddCardName = popupAddCard.querySelector('.popup__name');
 const popupAddCardLink = popupAddCard.querySelector('.popup__note');
 const buttonAddCard = document.querySelector('.profile__added');
-const buttonCloseAddCard = popupAddCard.querySelector('.popup__close')
 const popupImage = document.querySelector('.popup_open_image')
 const popupImageText = document.querySelector('.popup__text');
 const popupImageOpened = document.querySelector('.popup__full-image');
