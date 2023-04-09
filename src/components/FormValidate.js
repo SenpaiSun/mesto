@@ -19,7 +19,7 @@ export class FormValidator {
   }
 
   // Создаем условие по которому будет блокироваться/разблокироваться button
-  _toggleButtonState() {
+  toggleButtonState() {
     if (this._hasInvalidInput()) {
       this._buttonElement.classList.add(this._config.buttonClass)
       this._buttonElement.setAttribute('disabled', 'disabled')
@@ -55,16 +55,16 @@ export class FormValidator {
 
 // Навешивам обработчик на все input, вызываем функцию блокирования кнопки при открытии попапа
 _setEventListeners() {
-  this._toggleButtonState()
+  this.toggleButtonState()
   this._formElement.addEventListener('reset', () => {
     setTimeout(() => {
-      this._toggleButtonState()
+      this.toggleButtonState()
     }, 0)
   })
   this._inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
       this._isValid(inputElement)
-      this._toggleButtonState()
+      this.toggleButtonState()
     })
   })
 }

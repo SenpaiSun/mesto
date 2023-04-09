@@ -1,10 +1,10 @@
-import {cardTemplate, popupImageText, popupImageOpened, openPopup, popupImage, handleOpenCard} from './index.js'
+import {cardTemplate, popupImageText, popupImageOpened, popupImage} from '../index.js'
 
 export class Card {
-  constructor(name, link, cardTemplate, handleOpenCard) {
+  constructor({data, handleOpenCard}, cardTemplate) {
     this._handleOpenCard = handleOpenCard
-    this._link = link;
-    this._name = name;
+    this._link = data.link;
+    this._name = data.name;
     this._cardTemplate = cardTemplate
   }
 
