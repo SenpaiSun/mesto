@@ -1,11 +1,11 @@
-import './pages/index.css'
-import {Card} from './components/Card.js'
-import {cardDefault} from './components/cards.js'
-import {FormValidator} from './components/FormValidate.js'
-import {Section} from './components/Section.js'
-import {PopupWithForm} from './components/PopupWithForm.js'
-import {PopupWithImage} from './components/PopupWithImage.js'
-import {UserInfo} from './components/UserInfo.js'
+import './index.css'
+import {Card} from '../components/Card.js'
+import {cardDefault} from '../components/cards.js'
+import {FormValidator} from '../components/FormValidate.js'
+import {Section} from '../components/Section.js'
+import {PopupWithForm} from '../components/PopupWithForm.js'
+import {PopupWithImage} from '../components/PopupWithImage.js'
+import {UserInfo} from '../components/UserInfo.js'
 
 const buttonProfile = document.querySelector('.profile__info-edit');
 const popupProfile = document.querySelector('.popup_edit_profile');
@@ -63,16 +63,16 @@ const createCard = (data) => {
 
 // Класс, отвечающий за информацию о пользователе
 const userInfo = new UserInfo({
-  nameSelector: userName,
-  noteSelector: userNote})
+  nameValue: userName,
+  noteValue: userNote})
 
 // Попап редактирования профиля + листенер
 const popupInfoEdit = new PopupWithForm({
-  popupSelector: popupProfile,
+  popupFind: popupProfile,
   submitHandler: (item) => {
     userInfo.setUserInfo({
-      nameSelector: item.nameSelector,
-      noteSelector: item.noteSelector
+      nameValue: item.nameValue,
+      noteValue: item.noteValue
     })
     popupInfoEdit.close()
     }
@@ -82,17 +82,17 @@ const popupInfoEdit = new PopupWithForm({
 popupInfoEdit.setEventListeners()
 
 // Функция замены информации о юзере
-function pasteInfo({ nameSelector, noteSelector }) {
-  nameInput.value = nameSelector;
-  noteInput.value = noteSelector;
+function pasteInfo({ nameValue, noteValue }) {
+  nameInput.value = nameValue;
+  noteInput.value = noteValue;
 };
 
 // Обработчик на изменение информации о юзере
 buttonProfile.addEventListener('click', () => {
   const profileInfo = userInfo.getUserInfo();
   pasteInfo({
-    nameSelector: profileInfo.nameSelector,
-    noteSelector: profileInfo.noteSelector
+    nameValue: profileInfo.nameValue,
+    noteValue: profileInfo.noteValue
   });
   formValidationProfile.removeValidation(errorInputProfile, errorSpanProfile)
   popupInfoEdit.open();
@@ -100,7 +100,7 @@ buttonProfile.addEventListener('click', () => {
 
 // Класс на добавление новой карточки
 const cardAddPage = new PopupWithForm({
-  popupSelector: popupAddCard,
+  popupFind: popupAddCard,
   submitHandler: (item) => {
     cardList.addItem(createCard(item));
     cardAddPage.close();
