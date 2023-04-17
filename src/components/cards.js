@@ -6,7 +6,7 @@ export const cardDefault = [
   },
   {
     name: 'Эрмитаж',
-    link: 'https://machinami.biz/wp-content/uploads/2016/01/P8060080.jpg'
+    link: 'https://sun9-52.userapi.com/impg/qFhtj8vvINAizc5CtPtJM-TcijZ_tTAUC903oQ/FjNQXyOWBzU.jpg?size=1280x853&quality=95&sign=8fa41d4a43b39254ef34992cb59af803&c_uniq_tag=IKRHvmx1Y8TGsHh8JgKndWoEKfvHCy1raKRgcWOAOqQ&type=album'
   },
   {
     name: 'Великая Китайская стена',
