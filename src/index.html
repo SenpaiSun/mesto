@@ -13,7 +13,7 @@
   </header>
   <main>
     <section class="profile">
-      <img class="profile__photo" src="" alt="Аватар пользователя">
+      <img class="profile__photo" src="#" alt="Аватар пользователя">
       <button class="profile__button"></button>
       <div class="profile__info">
         <div class="profile__info-profile">
@@ -64,22 +64,23 @@
      </div>
   </div>
   <div class="popup popup_delete_card">
-    <div class="popup__page popup_confirm_delete">
-      <form class="popup__form form" name="form-add-card" id="form-card" novalidate>
+    <div class="popup__page popup__confirm-delete">
+      <form class="popup__form form" name="form-delete-card" id="form-delete-card" novalidate>
         <button type="button" class="popup__close popup__close-delete" aria-label="Закрытие добавление карточки"></button>
         <p class="popup__title">Вы уверены?</p>
-        <button type="submit" class="popup__save popup_accept_delete" aria-label="Сохранить изменения">Да</button>
+        <button type="submit" class="popup__save popup__accept-delete" aria-label="Сохранить изменения">Да</button>
       </form>
     </div>
   </div>
   <div class="popup popup_update_avatar">
-    <div class="popup__page popup_add_avatar">
+    <div class="popup__page popup__add-avatar">
       <button class="popup__close" aria-label="Закрытие добавление карточки"></button>
       <p class="popup__title">Обновить аватар</p>
-      <form class="popup__form form" name="form-add-card" id="form-card" novalidate>
-        <input type="url" class="popup__note form__input" id="input-note-card" name="link" placeholder="Ссылка на картинку" required>
-        <span class="popup__input-error input-note-card-error"></span>
-        <button type="submit" class="popup__save popup_save_avatar" aria-label="Сохранить изменения">Сохранить</button>
+      <form class="popup__form form" name="update-avatar" id="update-avatar" novalidate>
+        <input type="url" class="popup__note form__input" id="update-avatar-input" name="link" placeholder="Ссылка на картинку" required>
+        <span class="popup__input-error update-avatar-input-error"></span>
+        <button type="submit" class="popup__save popup__save-avatar" aria-label="Сохранить изменения">Сохранить</button>
+      </form>
     </div>
   </div>
   <template class="card-temlate">

@@ -31,7 +31,7 @@ const errorSpanProfile = formProfile.querySelectorAll('.popup__input-error');
 const popupFormProfile = popupProfile.querySelector('.popup__form')
 const popupFormCard = popupAddCard.querySelector('.popup__form')
 const popupDeleteCard = document.querySelector('.popup_delete_card')
-const acceptDelete = document.querySelector('.popup_accept_delete')
+const acceptDelete = document.querySelector('.popup__accept-delete')
 const buttonChangeAvatar = document.querySelector('.profile__button')
 const formChangeAvatar = document.querySelector('.popup_update_avatar')
 const avatarUser = document.querySelector('.profile__photo')
@@ -135,7 +135,6 @@ const popupChangeAvatar = new PopupWithForm({
     popupChangeAvatar.checkLoading(true)
     api.changeAvatar(data)
     .then((res) => {
-      console.log(res)
       avatarUser.src = res.avatar
       popupChangeAvatar.close()
     })
