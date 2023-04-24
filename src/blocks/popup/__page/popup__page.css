@@ -3,8 +3,8 @@
   position: relative;
   margin: 195px auto;
   background-color: #FFFFFF;
-  max-width: 430px;
-  min-height: 330px;
+  width: 430px;
+  height: 330px;
   border-radius: 10px;
 }
 

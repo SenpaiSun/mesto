@@ -41,3 +41,11 @@
 @import url(../blocks/popup/__input_type_error/popup__input_type_error.css);
 @import url(../blocks/popup/__input-error-active/popup__input-error-active.css);
 @import url(../blocks/popup/__save-inactive/popup__save-inactive.css);
+@import url(../blocks/content/__like-info/content__like-info.css);
+@import url(../blocks/content/__like-value/content__like-value.css);
+@import url(../blocks/popup/_delete_card/popup_delete_card.css);
+@import url(../blocks/popup/_confirm_delete/popup_confirm_delete.css);
+@import url(../blocks/popup/_update_avatar/popup_update_avatar.css);
+@import url(../blocks/popup/_add_avatar/popup_add_avatar.css);
+@import url(../blocks/popup/_save_avatar/popup_save_avatar.css);
+@import url(../blocks/profile/__button/profile__button.css);
