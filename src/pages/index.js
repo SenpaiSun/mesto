@@ -1,6 +1,5 @@
 import './index.css'
 import {Card} from '../components/Card.js'
-import {cardDefault} from '../components/cards.js'
 import {FormValidator} from '../components/FormValidate.js'
 import {Section} from '../components/Section.js'
 import {PopupWithForm} from '../components/PopupWithForm.js'
@@ -98,6 +97,7 @@ api.getUserInfo()
 const popupInfoEdit = new PopupWithForm({
   popupFind: popupProfile,
   submitHandler: (data) => {
+    popupInfoEdit.checkLoading(true)
     api.updateUserProfile(data)
     .then((data) => {
       const userName = data.name
@@ -107,6 +107,9 @@ const popupInfoEdit = new PopupWithForm({
     })
     .catch((error) => {
       error.status
+    })
+    .finally(() => {
+      popupInfoEdit.checkLoading(false)
     })
   }
 })
@@ -129,6 +132,7 @@ buttonProfile.addEventListener('click', () => {
 const popupChangeAvatar = new PopupWithForm({
   popupFind: formChangeAvatar,
   submitHandler: (data) => {
+    popupChangeAvatar.checkLoading(true)
     api.changeAvatar(data)
     .then((res) => {
       console.log(res)
@@ -137,6 +141,9 @@ const popupChangeAvatar = new PopupWithForm({
     })
     .catch((error) => {
       error.status
+    })
+    .finally(() => {
+      popupChangeAvatar.checkLoading(false)
     })
   }
 })
@@ -185,8 +192,8 @@ const createCard = (data) => {
       .then((data) => {
         card.handleLikeCard(data);
       })
-      .catch((err) => {
-        console.log(`Ошибка: ${err}`);
+      .catch((error) => {
+        error.status;
       });
   },
   handleDeleteLike: (cardId) => {
@@ -207,6 +214,7 @@ const createCard = (data) => {
 const cardAddPage = new PopupWithForm({
   popupFind: popupAddCard,
   submitHandler: (data) => {
+    cardAddPage.checkLoading(true)
     api.createNewCard(data)
     .then((data) => {
       const cardList = new Section({
@@ -216,6 +224,10 @@ const cardAddPage = new PopupWithForm({
       }}, sectionContent)
       cardList.addItem(createCard(data))
       cardAddPage.close();
+    })
+    .catch(error => error.status)
+    .finally(() => {
+      cardAddPage.checkLoading(false)
     })
   }
 });
