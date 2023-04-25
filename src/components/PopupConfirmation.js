@@ -1,6 +1,6 @@
 import {Popup} from './Popup.js'
 
-export class PopupWithDelete extends Popup {
+export class PopupConfirmation extends Popup {
   constructor(popupFind) {
     super(popupFind);
     this._form = this._popup.querySelector('.popup__form');

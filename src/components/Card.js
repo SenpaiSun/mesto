@@ -1,5 +1,5 @@
 export class Card {
-  constructor({cardId, userId, data, handleOpenCard, handleButtonDelete, handleCardDeleteItem, handleLike, handleDeleteLike}, cardTemplate, popupDeleteSelector) {
+  constructor({cardId, userIdProfile, data, handleOpenCard, handleButtonDelete, handleCardDeleteItem, handleLike, handleDeleteLike}, cardTemplate, popupDeleteSelector) {
     this._handleOpenCard = handleOpenCard;
     this._handleOpenDelete = handleButtonDelete;
     this._handleCardDeleteItem = handleCardDeleteItem;
@@ -9,7 +9,7 @@ export class Card {
     this._name = data.name;
     this._likes = data.likes;
     this._cardId = cardId;
-    this._userId = userId;
+    this._userId = userIdProfile;
     this._cardUsersId = data.owner._id;
     this._cardTemplate = cardTemplate;
     this._popupDeleteSelector = popupDeleteSelector;
@@ -36,6 +36,7 @@ export class Card {
     this._cardPhoto.src = this._link
     this._cardName.alt = this._name
     this._likedCard()
+    console.log(this._checkoutIdUsers())
     this._checkoutIdUsers()
     this._cardLikeValue.textContent = this._likes.length
     this._setEventListeners()

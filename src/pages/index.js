@@ -5,7 +5,7 @@ import {Section} from '../components/Section.js'
 import {PopupWithForm} from '../components/PopupWithForm.js'
 import {PopupWithImage} from '../components/PopupWithImage.js'
 import {UserInfo} from '../components/UserInfo.js'
-import {PopupWithDelete} from '../components/PopupWithDelete.js'
+import {PopupConfirmation} from '../components/PopupConfirmation.js'
 import {Api} from '../components/Api.js'
 
 // Константы
@@ -50,27 +50,32 @@ const api = new Api({baseUrl: 'https://nomoreparties.co/v1/cohort-64', headers: 
   "Content-Type": "application/json"
 }})
 
+const cardList = new Section({
+  renderer: item => {
+  cardList.addItem(createCard(item))
+}}, sectionContent)
 
-// <--------------- Загрузка дефолтных карточек -------------->
-api.getDefaultCards()
-.then((res) => {
-  const cardList = new Section({
-    items: res,
-    renderer: item => {
-    cardList.addItem(createCard(item))
-  }}, sectionContent)
-  cardList.renderItems()
+// Записываем айди нашего пользователя
+let userId
+
+Promise.all([api.getDefaultCards(), api.getUserInfo()])
+.then(([defaultCards, userDataInfo]) => {
+  userInfo.setUserInfo(userDataInfo);
+  userId = userDataInfo._id;
+  cardList.renderItems(defaultCards.reverse())
+  userInfo.setUserInfo({ nameValue: userDataInfo.name, noteValue: userDataInfo.about, avatarInfo: userDataInfo.avatar })
 })
-.catch(error => error.status)
+.catch((error) => {
+  error.status;
+});
 
 // <--------------- Профиль -------------->
 // Класс, отвечающий за информацию о пользователе
 const userInfo = new UserInfo({
   nameValue: userName,
-  noteValue: userNote})
-
-// Записываем айди нашего пользователя
-  let userId
+  noteValue: userNote,
+  avatarInfo: avatarUser
+})
 
 // Функция замены информации о юзере
 function pasteInfo({ nameValue, noteValue }) {
@@ -83,7 +88,7 @@ const formValidationProfile = new FormValidator(config, popupFormProfile)
 formValidationProfile.enableValidation()
 
 // Получение данных с сервера и установка name и about в верстку
-api.getUserInfo()
+/* api.getUserInfo()
 .then((res) => {
   const userName = res.name
   const userAbout = res.about
@@ -91,7 +96,7 @@ api.getUserInfo()
   userId = res._id
   userInfo.setUserInfo({nameValue: userName, noteValue: userAbout})
 })
-.catch(error => error.status)
+.catch(error => error.status) */
 
 // Попап редактирования профиля + листенер
 const popupInfoEdit = new PopupWithForm({
@@ -102,7 +107,8 @@ const popupInfoEdit = new PopupWithForm({
     .then((data) => {
       const userName = data.name
       const userAbout = data.about
-      userInfo.setUserInfo({nameValue: userName, noteValue: userAbout})
+      const userAvatar = data.avatar
+      userInfo.setUserInfo({nameValue: userName, noteValue: userAbout, avatarInfo: userAvatar})
       popupInfoEdit.close();
     })
     .catch((error) => {
@@ -157,13 +163,15 @@ buttonChangeAvatar.addEventListener('click', () => {
 
 // <--------------- Секция с карточками -------------->
 // создание экземпляра класса попапа подтверждения
-const confirmDeleteCard = new PopupWithDelete(popupDeleteCard);
+const confirmDeleteCard = new PopupConfirmation(popupDeleteCard);
+confirmDeleteCard.setEventListeners()
 
 // Функция создания новой карточки
 const createCard = (data) => {
+  console.log(data);
   const card = new Card({
     cardId: data._id,
-    userId: userId,
+    userIdProfile: userId,
     data: data,
     handleOpenCard: (name, link) => {
       imageOpenPopup.open(name, link)
@@ -172,13 +180,11 @@ const createCard = (data) => {
     confirmDeleteCard.open()
   },
   handleCardDeleteItem: (cardId) => {
-    const cardDeleted = new PopupWithDelete(popupDeleteCard)
-    cardDeleted.setEventListeners()
-    cardDeleted.open()
-    cardDeleted.submitCallback(() => {
+    confirmDeleteCard.open()
+    confirmDeleteCard.submitCallback(() => {
       api.deleteCard(cardId)
       .then(() => {
-        cardDeleted.close()
+        confirmDeleteCard.close()
         card.handleCardDelete()
       })
       .catch((error) => {
@@ -216,11 +222,6 @@ const cardAddPage = new PopupWithForm({
     cardAddPage.checkLoading(true)
     api.createNewCard(data)
     .then((data) => {
-      const cardList = new Section({
-        items: data,
-        renderer: item => {
-        cardList.addItem(createCard(item))
-      }}, sectionContent)
       cardList.addItem(createCard(data))
       cardAddPage.close();
     })

@@ -5,8 +5,8 @@ export class Section {
     this._container = containerFind;
   }
 
-  renderItems() {
-    this._renderedItems.forEach(element => {
+  renderItems(item) {
+    item.forEach(element => {
       this._renderer(element)
     });
   }
