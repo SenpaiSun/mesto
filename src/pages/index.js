@@ -87,17 +87,6 @@ function pasteInfo({ nameValue, noteValue }) {
 const formValidationProfile = new FormValidator(config, popupFormProfile)
 formValidationProfile.enableValidation()
 
-// Получение данных с сервера и установка name и about в верстку
-/* api.getUserInfo()
-.then((res) => {
-  const userName = res.name
-  const userAbout = res.about
-  avatarUser.src = res.avatar
-  userId = res._id
-  userInfo.setUserInfo({nameValue: userName, noteValue: userAbout})
-})
-.catch(error => error.status) */
-
 // Попап редактирования профиля + листенер
 const popupInfoEdit = new PopupWithForm({
   popupFind: popupProfile,
